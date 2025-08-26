@@ -2,34 +2,34 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Needed for pushing to gh-pages
-    steps:
-      # 1. Checkout the code
-      - uses: actions/checkout@v3
 
-      # 2. Set up Node.js
-      - name: Set up Node.js
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 22
+          cache: 'npm'
 
-      # 3. Install dependencies
+      - name: Set npm registry
+        run: npm config set registry https://registry.npmjs.org/
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci --legacy-peer-deps
 
-      # 4. Build the React app
-      - name: Build
+      - name: Build project
         run: npm run build
 
-      # 5. Deploy to gh-pages branch
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build
           branch: gh-pages
+          folder: build
