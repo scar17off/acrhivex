@@ -14,7 +14,7 @@ const clients = [
     type: "DDNet, Cheat",
     dataType: "ddnet cheat",
     tags: ["DDNet", "Cheat"],
-    link: "https://drive.google.com/file/d/15sfzWDbJKEdwIdWMnr-E63LzEHqdsVZ4/view?usp=sharing",
+    link: "https://gc-cff.github.io/website/",
     buy: false
   },
   {
